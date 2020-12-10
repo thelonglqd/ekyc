@@ -1,40 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-  Grid,
-  Paper,
-  Button,
-  TextField,
-} from "@material-ui/core";
-
-const drawerWidth = 240;
+import { Typography, Grid, Paper, Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    zIndex: 1,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  toolbar: theme.mixins.toolbar,
-  title: {
-    flexGrow: 1,
-  },
-  username: {
-    marginRight: 5,
-  },
   loginTitle: {
     marginBottom: theme.spacing(4),
   },
@@ -45,11 +13,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
-  },
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
   },
 }));
 

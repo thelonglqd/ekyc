@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     padding: 20,
+    backgroundColor: theme.palette.background.default,
   },
 }));
 
@@ -20,7 +21,7 @@ const App = () => {
     <div className={classes.root}>
       {auth ? (
         <>
-          <Header />
+          <Header onChangeAuth={setAuth} />
           <SideBar />
         </>
       ) : (

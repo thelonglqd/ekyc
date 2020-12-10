@@ -6,11 +6,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography,
-  Grid,
-  Paper,
-  Button,
-  TextField,
 } from "@material-ui/core";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { Call, Person, Group, Settings } from "@material-ui/icons";
@@ -38,15 +33,6 @@ const routes = [
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    padding: 20,
-  },
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    zIndex: 1,
-  },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -55,27 +41,10 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   toolbar: theme.mixins.toolbar,
-  title: {
-    flexGrow: 1,
-  },
-  username: {
-    marginRight: 5,
-  },
-  loginTitle: {
-    marginBottom: theme.spacing(4),
-  },
-  loginButton: {
-    marginTop: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
+    marginTop: theme.spacing(10),
   },
 }));
 
@@ -91,7 +60,6 @@ const SideBar = () => {
         }}
         anchor="left"
       >
-        <div className={classes.toolbar} />
         <List>
           {routes.map((route) => (
             <Link to={route.path}>
@@ -103,12 +71,16 @@ const SideBar = () => {
           ))}
         </List>
       </Drawer>
-      <Switch>
-        <Route exact path="/" component={CallDashboard}></Route>
-        <Route path="/khachhang" component={CustomerDashboard}></Route>
-        <Route path="/nhom" component={GroupDashboard}></Route>
-        <Route path="/caidat" component={SettingsDashboard}></Route>
-      </Switch>
+      <div className={classes.content}>
+        <div className={classes.toolbar}>
+          <Switch>
+            <Route exact path="/" component={CallDashboard}></Route>
+            <Route path="/khachhang" component={CustomerDashboard}></Route>
+            <Route path="/nhom" component={GroupDashboard}></Route>
+            <Route path="/caidat" component={SettingsDashboard}></Route>
+          </Switch>
+        </div>
+      </div>
     </Router>
   );
 };
