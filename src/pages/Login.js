@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     margin: "auto",
-    border: "1px solid #dedede",
+    border: `1px solid ${theme.palette.secondary.main}`,
     borderRadius: 4,
     padding: 20,
   },
@@ -40,7 +40,7 @@ const Login = ({ onChangeAuth }) => {
   };
 
   return (
-    <Grid justify="center" container spacing={10}>
+    <Grid justify="center" alignItems="center" container spacing={10}>
       <Grid item xs={6}>
         <div className={classes.loginContainer}>
           <Typography

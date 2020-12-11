@@ -40,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: theme.palette.primary.main,
+    borderRight: "none",
   },
   toolbar: theme.mixins.toolbar,
   content: {
@@ -51,17 +53,19 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "inherit",
   },
+  itemText: { color: "white" },
+  itemIcon: { color: "white " },
 }));
 
-const ListItem = withStyles({
+const ListItem = withStyles(({ palette }) => ({
   root: {
     "&$selected, &$selected:hover, &:hover": {
-      backgroundColor: "red",
+      backgroundColor: palette.info.main,
       color: "white",
     },
   },
   selected: {},
-})(MuiListItem);
+}))(MuiListItem);
 
 const SideBar = ({ location }) => {
   const classes = useStyles();
@@ -76,6 +80,8 @@ const SideBar = ({ location }) => {
         }}
         anchor="left"
       >
+        <div className={classes.toolbar} />
+        <div className={classes.toolbar} />
         <List>
           {routes.map((route) => (
             <NavLink strict to={route.path} className={classes.navlink}>
@@ -85,8 +91,13 @@ const SideBar = ({ location }) => {
                 button
                 key={route.text}
               >
-                <ListItemIcon>{route.icon}</ListItemIcon>
-                <ListItemText primary={route.text} />
+                <ListItemIcon className={classes.itemIcon}>
+                  {route.icon}
+                </ListItemIcon>
+                <ListItemText
+                  className={classes.itemText}
+                  primary={route.text}
+                />
               </ListItem>
             </NavLink>
           ))}
