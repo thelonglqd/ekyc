@@ -3,6 +3,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Paper, Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  loginContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "auto",
+    border: "1px solid #dedede",
+    borderRadius: 4,
+    padding: 20,
+  },
   loginTitle: {
     marginBottom: theme.spacing(4),
   },
@@ -32,7 +42,7 @@ const Login = ({ onChangeAuth }) => {
   return (
     <Grid justify="center" container spacing={10}>
       <Grid item xs={6}>
-        <Paper className={classes.paper}>
+        <div className={classes.loginContainer}>
           <Typography
             color="primary"
             variant="h5"
@@ -75,7 +85,7 @@ const Login = ({ onChangeAuth }) => {
           >
             ĐĂNG NHẬP
           </Button>
-        </Paper>
+        </div>
       </Grid>
     </Grid>
   );

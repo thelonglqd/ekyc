@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import "./index.css";
 
 import Header from "./components/Header";
 import SideBar from "./components/Sidebar";
@@ -9,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     padding: 20,
-    backgroundColor: theme.palette.background.default,
   },
 }));
 

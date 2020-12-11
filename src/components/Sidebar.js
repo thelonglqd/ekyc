@@ -1,14 +1,15 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {
   Drawer,
   List,
-  ListItem,
+  ListItem as MuiListItem,
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import { Call, Person, Group, Settings } from "@material-ui/icons";
+import { withRouter } from "react-router";
 
 import CallDashboard from "../pages/CallDashboard";
 import CustomerDashboard from "../pages/CustomerDashboard";
@@ -16,17 +17,17 @@ import GroupDashboard from "../pages/GroupDashboard";
 import SettingsDashboard from "../pages/SettingsDashboard";
 
 const routes = [
-  { icon: <Call />, text: "Quản lý cuộc gọi", path: "/" },
+  { icon: <Call />, text: "Cuộc gọi", path: "/" },
   {
     icon: <Person />,
-    text: "Quản lý tài khoản khách hàng",
+    text: "Khách hàng",
     path: "/khachhang",
   },
-  { icon: <Group />, text: "Quản lý nhóm", path: "nhom" },
+  { icon: <Group />, text: "Nhóm", path: "/nhom" },
   {
     icon: <Settings />,
-    text: "Quản lý tham số cấu hình hệ thống",
-    path: "caidat",
+    text: "Hệ thống",
+    path: "/caidat",
   },
 ];
 
@@ -46,12 +47,27 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
     marginTop: theme.spacing(10),
   },
+  navlink: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 }));
 
-const SideBar = () => {
+const ListItem = withStyles({
+  root: {
+    "&$selected, &$selected:hover, &:hover": {
+      backgroundColor: "red",
+      color: "white",
+    },
+  },
+  selected: {},
+})(MuiListItem);
+
+const SideBar = ({ location }) => {
   const classes = useStyles();
+
   return (
-    <Router>
+    <>
       <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -62,27 +78,32 @@ const SideBar = () => {
       >
         <List>
           {routes.map((route) => (
-            <Link to={route.path}>
-              <ListItem button key={route.text}>
+            <NavLink strict to={route.path} className={classes.navlink}>
+              <ListItem
+                className={classes.navItem}
+                selected={location.pathname === route.path}
+                button
+                key={route.text}
+              >
                 <ListItemIcon>{route.icon}</ListItemIcon>
                 <ListItemText primary={route.text} />
               </ListItem>
-            </Link>
+            </NavLink>
           ))}
         </List>
       </Drawer>
       <div className={classes.content}>
         <div className={classes.toolbar}>
           <Switch>
-            <Route exact path="/" component={CallDashboard}></Route>
+            <Route path="/" exact strict component={CallDashboard}></Route>
             <Route path="/khachhang" component={CustomerDashboard}></Route>
             <Route path="/nhom" component={GroupDashboard}></Route>
             <Route path="/caidat" component={SettingsDashboard}></Route>
           </Switch>
         </div>
       </div>
-    </Router>
+    </>
   );
 };
 
-export default SideBar;
+export default withRouter(SideBar);
