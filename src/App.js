@@ -6,7 +6,8 @@ import "./index.css";
 import Header from "./components/Header";
 import SideBar from "./components/Sidebar";
 import Login from "./pages/Login";
-import ProgressBar from "./components/ProgressBar";
+import LoadingSpinner from "./components/LoadingSpinner";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,15 +16,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App = () => {
+const App = ({ ui }) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(false);
 
+  console.log("uiiiiii: ", ui);
+
   return (
     <>
-      <ProgressBar />
       <div className={classes.root}>
         <CssBaseline />
+        <LoadingSpinner isShown={ui.loading} />
         {auth ? (
           <>
             <Header onChangeAuth={setAuth} />
@@ -37,4 +40,8 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  ui: state.ui,
+});
+
+export default connect(mapStateToProps)(App);

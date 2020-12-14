@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Paper, Button, TextField } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   loginContainer: {
@@ -30,13 +31,19 @@ const Login = ({ onChangeAuth }) => {
   const classes = useStyles();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const dispatch = useDispatch();
 
   const onUsernameChange = (e) => setUsername(e.target.value);
   const onPasswordChange = (e) => setPassword(e.target.value);
 
   const onLoginClick = () => {
-    if (username === "admin" && password === "admin") onChangeAuth(true);
-    else return;
+    dispatch({ type: "LOGIN_START" });
+    if (username === "admin" && password === "admin") {
+      setTimeout(() => {
+        onChangeAuth(true);
+        dispatch({ type: "LOGIN_SUCCESS" });
+      }, 1000);
+    } else return;
   };
 
   return (
