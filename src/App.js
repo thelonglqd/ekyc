@@ -20,8 +20,6 @@ const App = ({ ui }) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(false);
 
-  console.log("uiiiiii: ", ui);
-
   return (
     <>
       <div className={classes.root}>

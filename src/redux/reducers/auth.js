@@ -1,3 +1,5 @@
+import { LOGIN_SUCCESS } from "../actions/types";
+
 const initialState = {
   fullName: "",
   avatarUrl: "",
@@ -5,5 +7,15 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        fullName: action.payload.fullName,
+        stringeeAccessToken: action.payload.stringeeAccessToken,
+        avatarUrl: action.payload.avatarUrl,
+      };
+    default:
+      return state;
+  }
 };

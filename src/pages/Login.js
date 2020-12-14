@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Paper, Button, TextField } from "@material-ui/core";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   loginContainer: {
@@ -38,12 +39,31 @@ const Login = ({ onChangeAuth }) => {
 
   const onLoginClick = () => {
     dispatch({ type: "LOGIN_START" });
-    if (username === "admin" && password === "admin") {
-      setTimeout(() => {
+    axios({
+      method: "post",
+      url: "http://128.199.145.244:8000/ekyc/login",
+      data: {
+        userId: username,
+        password: password,
+      },
+    })
+      .then(({ data }) => {
+        console.log("SUCCESS !!!!!!!");
         onChangeAuth(true);
-        dispatch({ type: "LOGIN_SUCCESS" });
-      }, 1000);
-    } else return;
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: {
+            fullName: data.response.fullName,
+            stringeeAccessToken: data.response.stringeeAccessToken,
+            avatarUrl: data.response.avatarUrl,
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("ERROR: ", error);
+        dispatch({ type: "LOGIN_FAILED" });
+        alert("INVALID LOGIN");
+      });
   };
 
   return (
