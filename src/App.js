@@ -6,6 +6,7 @@ import "./index.css";
 import Header from "./components/Header";
 import SideBar from "./components/Sidebar";
 import Login from "./pages/Login";
+import ProgressBar from "./components/ProgressBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,17 +20,20 @@ const App = () => {
   const [auth, setAuth] = React.useState(false);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      {auth ? (
-        <>
-          <Header onChangeAuth={setAuth} />
-          <SideBar />
-        </>
-      ) : (
-        <Login onChangeAuth={setAuth} />
-      )}
-    </div>
+    <>
+      <ProgressBar />
+      <div className={classes.root}>
+        <CssBaseline />
+        {auth ? (
+          <>
+            <Header onChangeAuth={setAuth} />
+            <SideBar />
+          </>
+        ) : (
+          <Login onChangeAuth={setAuth} />
+        )}
+      </div>
+    </>
   );
 };
 
