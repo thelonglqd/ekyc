@@ -1,7 +1,7 @@
-import React from "react";
-import { Typography } from "@material-ui/core";
+import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+import { StringeeClient, StringeeChat } from "stringee-chat-js-sdk";
 
 const useStyles = makeStyles((theme) => ({
   toolbarOffset: theme.mixins.toolbar,
@@ -12,18 +12,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CallDashboard = ({ auth }) => {
-  const classes = useStyles();
+class CallDashboard extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <>
-      <h1>CallDashboard</h1>
-      <h2>{auth.fullName}</h2>
-      <h2>{auth.avatarUrl}</h2>
-      <h2>{auth.stringeeAccessToken}</h2>
-    </>
-  );
-};
+  render() {
+    return (
+      <>
+        <h1>CallDashboard</h1>
+        <h2>{this.props.auth.fullName}</h2>
+        <h2>{this.props.auth.avatarUrl}</h2>
+
+        <div></div>
+      </>
+    );
+  }
+}
 
 const mapStateToProps = (state) => ({
   auth: state.auth,

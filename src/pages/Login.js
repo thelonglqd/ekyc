@@ -48,8 +48,6 @@ const Login = ({ onChangeAuth }) => {
       },
     })
       .then(({ data }) => {
-        console.log("SUCCESS !!!!!!!");
-        onChangeAuth(true);
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: {
@@ -60,7 +58,6 @@ const Login = ({ onChangeAuth }) => {
         });
       })
       .catch((error) => {
-        console.error("ERROR: ", error);
         dispatch({ type: "LOGIN_FAILED" });
         alert("INVALID LOGIN");
       });

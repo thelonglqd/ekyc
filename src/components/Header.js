@@ -9,7 +9,10 @@ import {
   MenuItem,
 } from "@material-ui/core";
 
+import { useDispatch } from "react-redux";
+
 import { AccountCircle } from "@material-ui/icons";
+import { LOGOUT_SUCCESS } from "../redux/actions/types";
 
 const drawerWidth = 240;
 
@@ -25,10 +28,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ onChangeAuth }) => {
+const Header = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -40,7 +44,7 @@ const Header = ({ onChangeAuth }) => {
 
   const onLogoutClick = () => {
     setAnchorEl(null);
-    onChangeAuth(false);
+    dispatch({ type: LOGOUT_SUCCESS });
   };
 
   return (
